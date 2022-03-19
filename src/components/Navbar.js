@@ -6,6 +6,21 @@ import { Button } from "./Button";
 import "./Navbar.css";
 import { IconContext } from "react-icons/lib";
 
+const linkConfig = [
+  {
+    link: "",
+    text: "Home",
+  },
+  {
+    link: "services",
+    text: "Services",
+  },
+  {
+    link: "products",
+    text: "Products",
+  },
+];
+
 function Navbar() {
   const [click, setClick] = useState(false);
   const [button, setButton] = useState(true);
@@ -31,29 +46,19 @@ function Navbar() {
               {click ? <FaTimes /> : <FaBars />}
             </div>
             <ul className={click ? "nav-menu active" : "nav-menu"}>
-              <li className="nav-item">
-                <Link to="/" className="nav-links" onClick={closeMobileMenu}>
-                  Home
-                </Link>
-              </li>
-              <li className="nav-item">
-                <Link
-                  to="/services"
-                  className="nav-links"
-                  onClick={closeMobileMenu}
-                >
-                  Services
-                </Link>
-              </li>
-              <li className="nav-item">
-                <Link
-                  to="/products"
-                  className="nav-links"
-                  onClick={closeMobileMenu}
-                >
-                  Products
-                </Link>
-              </li>
+              {linkConfig.map(({ link, text }) => {
+                return (
+                  <li className="nav-item">
+                    <Link
+                      to={`/${link}`}
+                      className="nav-links"
+                      onClick={closeMobileMenu}
+                    >
+                      {text}
+                    </Link>
+                  </li>
+                );
+              })}
               <li className="nav-btn">
                 {button ? (
                   <Link to="/sign-up" className="btn--link">

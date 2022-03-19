@@ -7,6 +7,41 @@ import { GiCrystalize } from "react-icons/gi";
 import { IconContext } from "react-icons/lib";
 import "./Pricing.css";
 
+const priceConfig = [
+  {
+    link: "sign-up",
+    icon: { iconName: FaFire },
+    header: "Starter",
+    price: "$8.99",
+    estimate: "per month",
+    transaction: "100 Transaction",
+    cashback: "2% Cashback",
+    limit: "$10,000 Limit",
+    buttonColor: "primary",
+  },
+  {
+    link: "sign-up",
+    icon: { iconName: BsXDiamondFill },
+    header: "Gold",
+    price: "$28.99",
+    estimate: "per month",
+    transaction: "1000 Transaction",
+    cashback: "2.5% Cashback",
+    limit: "$100,000 Limit",
+    buttonColor: "blue",
+  },
+  {
+    link: "sign-up",
+    icon: { iconName: GiCrystalize },
+    header: "Diamond",
+    price: "$98.99",
+    estimate: "per month",
+    transaction: "Unlimited Transaction",
+    cashback: "5% Cashback",
+    limit: "Unlimited Spending",
+    buttonColor: "primary",
+  },
+];
 const Pricing = () => {
   return (
     <IconContext.Provider value={{ color: "#fff", size: 64 }}>
@@ -14,60 +49,38 @@ const Pricing = () => {
         <div className="pricing__wrapper">
           <h1 className="pricing__header">Pricing</h1>
           <div className="pricing__container">
-            <Link to="/sign-up" className="pricing__container-card">
-              <div className="pricing__container-cardInfo">
-                <div className="icon">
-                  <FaFire />
-                </div>
-                <h3>Starter</h3>
-                <h4>$8.99</h4>
-                <p>per month</p>
-                <ul className="pricing__container-features">
-                  <li>100 Transaction</li>
-                  <li>2% Cashback</li>
-                  <li>$10,000 Limit</li>
-                </ul>
-                <Button buttonSize="btn--wide" buttonColor="primary">
-                  Choose Plan
-                </Button>
-              </div>
-            </Link>
-            <Link to="/sign-up" className="pricing__container-card">
-              <div className="pricing__container-cardInfo">
-                <div className="icon">
-                  <BsXDiamondFill />
-                </div>
-                <h3>Gold</h3>
-                <h4>$28.99</h4>
-                <p>per month</p>
-                <ul className="pricing__container-features">
-                  <li>1000 Transaction</li>
-                  <li>2.5% Cashback</li>
-                  <li>$100,000 Limit</li>
-                </ul>
-                <Button buttonSize="btn--wide" buttonColor="blue">
-                  Choose Plan
-                </Button>
-              </div>
-            </Link>
-            <Link to="/sign-up" className="pricing__container-card">
-              <div className="pricing__container-cardInfo">
-                <div className="icon">
-                  <GiCrystalize />
-                </div>
-                <h3>Diamond</h3>
-                <h4>$98.99</h4>
-                <p>per month</p>
-                <ul className="pricing__container-features">
-                  <li>Unlimited Transaction</li>
-                  <li>5% Cashback</li>
-                  <li>Unlimited Spending</li>
-                </ul>
-                <Button buttonSize="btn--wide" buttonColor="primary">
-                  Choose Plan
-                </Button>
-              </div>
-            </Link>
+            {priceConfig.map(
+              ({
+                link,
+                header,
+                icon,
+                price,
+                estimate,
+                transaction,
+                cashback,
+                limit,
+                buttonColor,
+              }) => {
+                return (
+                  <Link to={`/${link}`} className="pricing__container-card">
+                    <div className="pricing__container-cardInfo">
+                      <div className="icon">{<icon.iconName />}</div>
+                      <h3>{header}</h3>
+                      <h4>{price}</h4>
+                      <p>{estimate}</p>
+                      <ul className="pricing__container-features">
+                        <li>{transaction}</li>
+                        <li>{cashback}</li>
+                        <li>{limit}</li>
+                      </ul>
+                      <Button buttonSize="btn--wide" buttonColor={buttonColor}>
+                        Choose Plan
+                      </Button>
+                    </div>
+                  </Link>
+                );
+              }
+            )}
           </div>
         </div>
       </div>
